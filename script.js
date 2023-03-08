@@ -23,8 +23,33 @@ let isPainting = false;
 
 const divs = document.querySelectorAll('div.grid-div');
 
+// divs.addEventListener('mousedown', startPainting);
+// divs.addEventListener('mouseup', stopPainting);
+
+function startPainting() {
+  isPainting = true;
+  divs.forEach(div => {
+    div.addEventListener('mousemove', paint);
+  });
+}
+
+function stopPainting() {
+  isPainting = false;
+  divs.forEach(div => {
+    div.removeEventListener('mousemove', paint);
+  });
+}
+
 divs.forEach(div => {
-  div.addEventListener('mousedown', (event) => {      
+  div.addEventListener('mousedown',startPainting, (event) => { 
+    console.log('mousedown');
     paint();
   });
+
+  div.addEventListener('mouseup',stopPainting, (event) => {  
+    console.log('mouseup')   
+    paint();
+  });
+  
 });
+

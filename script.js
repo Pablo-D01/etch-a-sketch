@@ -53,3 +53,8 @@ divs.forEach(div => {
   
 });
 
+function reset(){
+  divs.forEach(div => {
+    div.style.backgroundColor = 'white';}
+)}
+

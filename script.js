@@ -1,10 +1,6 @@
-// Get the container element using its id
-let container = document.getElementsByClassName("container");
+  //wygenerowanie określonej liczby div
 
-function paint(){
-  console.log('Najechano na element');
-  const targetElement = event.target;
-  targetElement.style.backgroundColor = 'black';}
+let container = document.getElementsByClassName("container");
 
 for (let i = 0; i < 256; i++) {
     var newDiv = document.createElement("div");
@@ -14,47 +10,73 @@ for (let i = 0; i < 256; i++) {
     container[0].appendChild(newDiv);
   }
   
-  // let gridDiv = document.getElementsByClassName("grid-div");
-  // gridDiv.addEventListener('mousedown', (event) => {      
-  //   paint();
-  // });
 
-let isPainting = false;
+  // malowanie poprzez zmiane koloru div
+  //łapiemy wszystkie divy
+  const divs = document.querySelectorAll('div.grid-div');
 
-const divs = document.querySelectorAll('div.grid-div');
-
-// divs.addEventListener('mousedown', startPainting);
-// divs.addEventListener('mouseup', stopPainting);
-
-function startPainting() {
-  isPainting = true;
+  //dodajemy im event listenery na wciśniecie myszy i puszczenie
   divs.forEach(div => {
-    div.addEventListener('mousemove', paint);
-  });
-}
-
-function stopPainting() {
-  isPainting = false;
-  divs.forEach(div => {
-    div.removeEventListener('mousemove', paint);
-  });
-}
-
-divs.forEach(div => {
-  div.addEventListener('mousedown',startPainting, (event) => { 
-    console.log('mousedown');
-    paint();
-  });
-
-  div.addEventListener('mouseup',stopPainting, (event) => {  
-    console.log('mouseup')   
-    paint();
-  });
+    div.addEventListener('mousedown',startPainting, (event) => { 
+      console.log('mousedown');
+      paint();
+    });
   
-});
+    div.addEventListener('mouseup',stopPainting, (event) => {  
+      console.log('mouseup')   
+      paint();
+    });
+    
+  });
 
+//jeżeli mysz jest wcisnieta to isPainting = true -> ruch myszą = paint()
+  let isPainting = false;
+
+  function startPainting() {
+    isPainting = true;
+    divs.forEach(div => {
+      div.addEventListener('mousemove', paint);
+    });
+  }
+  
+  function stopPainting() {
+    isPainting = false;
+    divs.forEach(div => {
+      div.removeEventListener('mousemove', paint);
+    });
+  }
+
+
+  //zamiana kolorów tła
+  function paint(){
+    console.log('Najechano na element');
+    const targetElement = event.target;
+    targetElement.style.backgroundColor = `${color}`;}
+
+
+
+
+
+
+
+
+
+//zmiana kolorów wszystkich div na biały
 function reset(){
   divs.forEach(div => {
     div.style.backgroundColor = 'white';}
 )}
+
+
+// śledzenie zmian koloru
+let colorPicker  = document.getElementById('color-picker');
+
+//przy każdej zmianie value pobieramy nowy kolor
+let color = '#000000' ;
+
+colorPicker .addEventListener('input', () => {
+  const colorValue = colorPicker.value;
+  console.log('Wybrany kolor to:', colorValue);
+  color = colorValue;
+});
 

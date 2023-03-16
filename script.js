@@ -2,32 +2,62 @@
 
 let container = document.getElementsByClassName("container");
 
-for (let i = 0; i < 256; i++) {
-    var newDiv = document.createElement("div");
-    newDiv.setAttribute("class", "grid-div");
 
-    
-    container[0].appendChild(newDiv);
+let gridCounter = 16;
+let divCounter = gridCounter ** 2 ;
+let divSize = 400 / gridCounter ;
+
+function divSizeCalculations(){
+    divCounter = gridCounter ** 2 ;
+    divSize = 400 / gridCounter ;
+
+    console.log("divcounter:",divCounter,"divSize:",divSize)
+}
+
+  function generateDivs(){
+      for (let i = 0; i < divCounter; i++) {
+        var newDiv = document.createElement("div");
+        newDiv.setAttribute("class", "grid-div");
+        container[0].appendChild(newDiv);
+
+    }
+    console.log(divCounter, "DIVS GENERATED :D");
+
+    const divContainer = document.querySelector('.container');
+    divContainer.style.gridTemplateColumns = `repeat(${gridCounter}, 1fr)`;
+    divContainer.style.gridTemplateRows = `repeat(${gridCounter}, 1fr)`;
   }
+  generateDivs()
+  
+
+  
   
 
   // malowanie poprzez zmiane koloru div
   //łapiemy wszystkie divy
-  const divs = document.querySelectorAll('div.grid-div');
+  
 
   //dodajemy im event listenery na wciśniecie myszy i puszczenie
-  divs.forEach(div => {
-    div.addEventListener('mousedown',startPainting, (event) => { 
-      console.log('mousedown');
-      paint();
-    });
-  
-    div.addEventListener('mouseup',stopPainting, (event) => {  
-      console.log('mouseup')   
-      paint();
-    });
+  function addStylesToDivs(){
+    divs = document.querySelectorAll('div.grid-div');
+    divs.forEach(div => {
+      div.addEventListener('mousedown',startPainting, (event) => { 
+        console.log('mousedown');
+        paint();
+      });
     
-  });
+      div.addEventListener('mouseup',stopPainting, (event) => {  
+        console.log('mouseup')   
+        paint();
+      });
+      
+    });
+
+    console.log('divs are working now')
+  }
+  addStylesToDivs()
+
+  
 
 //jeżeli mysz jest wcisnieta to isPainting = true -> ruch myszą = paint()
   let isPainting = false;
@@ -69,7 +99,7 @@ function reset(){
 
 
 // śledzenie zmian koloru
-let colorPicker  = document.getElementById('color-picker');
+let colorPicker = document.getElementById('color-picker');
 
 //przy każdej zmianie value pobieramy nowy kolor
 let color = '#000000' ;
@@ -79,4 +109,31 @@ colorPicker .addEventListener('input', () => {
   console.log('Wybrany kolor to:', colorValue);
   color = colorValue;
 });
+
+
+// input
+let slider = document.getElementById("slider");
+let sizeValue = document.getElementById("sizeValue");
+
+
+// Dodaj nasłuchiwanie zdarzeń zmiany wartości dla slidera
+slider .addEventListener("input", () => {
+  const parent = document.querySelector('.container');
+  const value = slider.value;
+  sizeValue.textContent =`${value} x ${value}` ;
+
+  gridCounter = slider.value;
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  }
+  console.log('1');
+  divSizeCalculations()
+  generateDivs()
+  addStylesToDivs()
+  
+});
+
+//GUMKA
+
+function eraser() { color = 'white';  }
 

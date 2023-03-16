@@ -18,13 +18,20 @@ button{
 .container{
     flex: none;
     display: grid;
-    grid-template-columns: repeat(16, 1fr);
-    grid-template-rows: repeat(16, 1fr);
+    /* grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(16, 1fr); */
     grid-gap: 0px;
     width: 400px;
     height: 400px;
     border: solid black 1px;
 
+}
+
+.grid-div{
+    border: solid black 0px;
+    /* height: 25px;
+    width: 25px; */
+    
 }
 
 .container2{
@@ -39,12 +46,7 @@ button{
     margin-left: 10px;
 }
 
-.grid-div{
-    border: solid black 0px;
-    height: 25px;
-    width: 25px;
-    
-}
+
 .grid-div-hover{
     background-color: black;
     

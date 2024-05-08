@@ -3,3 +3,5 @@ The Etch-A-Sketch application is an interactive project that allows users to cre
 
 # DEMO
 https://pablo-d01.github.io/etch-a-sketch/
+![image](https://github.com/Pablo-D01/etch-a-sketch/assets/84712862/82f8c422-37c3-4bb7-8cdc-aa42d0cb4680)
+
